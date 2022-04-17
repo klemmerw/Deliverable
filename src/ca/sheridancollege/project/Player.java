@@ -13,7 +13,7 @@ package ca.sheridancollege.project;
  */
 public abstract class Player {
 
-    private String name; //the unique name for this player
+    private static String name; //the unique name for this player
 
     /**
      * A constructor that allows you to set the player's unique ID
@@ -27,7 +27,7 @@ public abstract class Player {
     /**
      * @return the player name
      */
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
@@ -43,7 +43,7 @@ public abstract class Player {
     /**
      * The method to be overridden when you subclass the Player class with your specific type of Player and filled in
      * with logic to play your game.
-     */
+     */    
     public abstract void play();
-
+    
 }

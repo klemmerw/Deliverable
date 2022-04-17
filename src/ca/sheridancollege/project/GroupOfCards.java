@@ -18,8 +18,9 @@ import java.util.Collections;
 public class GroupOfCards {
 
     //The group of cards, stored in an ArrayList
-    private ArrayList<Card> cards;
-    private int size;//the size of the grouping
+    private static ArrayList<Card> cards;
+    //the size of the grouping
+    private int size;
 
     public GroupOfCards(int size) {
         this.size = size;
@@ -34,7 +35,7 @@ public class GroupOfCards {
         return cards;
     }
 
-    public void shuffle() {
+    public static void shuffle() {
         Collections.shuffle(cards);
     }
 
