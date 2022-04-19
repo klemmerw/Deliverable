@@ -119,9 +119,9 @@ public abstract class Game {
     public static void main(String[] args) {
         
         Scanner input = new Scanner(System.in);
-//        System.out.println("Type in your Username: ");
-//        String userName = input.nextLine();
-//        userName = Player.getName();
+        System.out.println("Type in your Username: ");
+        String userName = input.nextLine();
+        userName = Player.getName();
         
         System.out.println("Hello and welcome to Go Fish!"
                 + "\n-------------------------------"
