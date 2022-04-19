@@ -25,7 +25,7 @@ public class Card {
      */
     
     //The array created for each type of suit
-    public static final String [] SUITS = {"Hearts", "Diamonds", "Spades", "Clubs"};
+    public static final String [] CARDS = {"ACE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN", "JACK", "QUEEN", "KING"};
     
     public Card() {
     }
@@ -40,28 +40,28 @@ public class Card {
     /**
      * @return the suit
      */
-    public String getSuit() {
+    public String getCard() {
         return suit;
     }
 
     /**
      * @param suit the suit to set
      */
-    public void setSuit(String suit) {
+    public void setCard(String suit) {
         this.suit = suit;
     }
 
     /**
      * @return the userSuit
      */
-    public static String getUserSuit() {
+    public static String getUserCard() {
         return userSuit;
     }
 
     /**
-     * @param userSuit the userSuit to set
+     * @param userCard the userCard to set
      */
-    public void setUserSuit(String userSuit) {
-        this.userSuit = userSuit;
+    public void setUserCard(String userCard) {
+        this.userSuit = userCard;
     }
 }

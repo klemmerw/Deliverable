@@ -17,27 +17,17 @@ import java.util.Scanner;
  */
 public abstract class Game {
 
-    private static String name = "Go Fish";//the title of the game
-    private ArrayList<Player> players;// the players of the game
-    private int userScore = 0; // The starting score for the user
-    private final int oppScore = 0; // The starting score for the opponent
-    private final boolean userWin = false; // If the userWin variable = true, increment userScore by adding 1.
-    private final boolean oppWin = false; // If the oppWin variable = true, increment the oppScore by adding 1.   
-    private static Card[] userDeck = new Card[7]; //The starting user deck of 7 cards
-    private static Card[] opponentDeck = new Card[7]; //The starting opponent deck of 7 cards
-    private static Card[] gameDeck = new Card[38]; // The starting game deck of 38 cards, equalling to 52 cards in total
+    // the players of the game
+    private ArrayList<Player> players;
+     // The starting score for the user and opponent
+    private int userScore = 0, oppScore = 0;
+    //If the userWin or oppWin variable = true, increment userScore by adding 1.
+    private final boolean userWin = false, oppWin = false;
+    //The starting user deck and opponentDeck of 7 cards
+    private static ArrayList<String> userDeck = new ArrayList<>(), opponentDeck = new ArrayList<>();
+    // The starting game deck of 38 cards, equalling to 52 cards in total
+    private static ArrayList<String>   gameDeck     = new ArrayList<>();
 
-    public Game(String name) {
-        this.name = name;
-        players = new ArrayList();
-    }
-
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
 
     /**
      * @return the players of this game
@@ -72,39 +62,38 @@ public abstract class Game {
     
     //The userTurn method that will be executed after the opponents turn
     public static void userTurn(){
-        for (int i = 0; i < userDeck.length; i++)
+//        for (String userDeck1 : userDeck) {
+//            Card c = new Card();
+//            c.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+//            userDeck.add(c.getCard());
+//        }
+        for (int i = 0; i < userDeck.size(); i++)
         {
-            Card c = new Card();
-            c.setSuit(Card.SUITS[(int)(Math.random() * 4)]);
-            userDeck[i] = c;
-        }
-        for (Card card : userDeck) 
-        {
-            System.out.println("Your Cards: " + card.getSuit());
+            System.out.println("Your Cards: " + userDeck.get(i));
             System.out.println("Your Turn: ");
         }
     }
     
     //The opponentTurn method that will be executed when the user gets Go Fish or gets a correct card.
     public static void opponentTurn() {
-        for (int i = 0; i < userDeck.length; i++)
+        for (int i = 0; i < userDeck.size(); i++)
         {
             Card c = new Card();
-            c.setSuit(Card.SUITS[(int)(Math.random() * 4)]);
-            userDeck[i] = c;
+            c.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+            userDeck.set(i, c.getCard());
         }
         
         //Displaying the user Cards to update the user despite being the opponents turn
         System.out.println("Your Cards: ");
-        for (Card card : userDeck) 
+        for (int i=0; i < userDeck.size(); i++) 
         {
-            System.out.println(card.getSuit());
+            System.out.println(userDeck.get(i));
         }
         
         //The opponent will guess for a random card everytime its the opponent turn, with the user replying with y or n
         Card opponentGuess = new Card();
-        opponentGuess.setSuit(Card.SUITS[(int)(Math.random() * 4)]);
-        System.out.println("Opponent: Do you have a " + opponentGuess.getSuit() + "? (y/n): ");
+        opponentGuess.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+        System.out.println("Opponent: Do you have a " + opponentGuess.getCard() + "? (y/n): ");
         Scanner input = new Scanner(System.in);
         char cardGuess = 'y';
         
@@ -128,46 +117,47 @@ public abstract class Game {
     public static void main(String[] args) {
         
         Scanner input = new Scanner(System.in);
-        System.out.println("Type in your Username: ");
-        String userName = input.nextLine();
-        userName = Player.getName();
+//        System.out.println("Type in your Username: ");
+//        String userName = input.nextLine();
+//        userName = Player.getName();
         
-        System.out.println("Hello " + userName + ", Welcome to " + name + "! \nInstructions:  "
+        System.out.println("Hello and welcome to Go Fish!"
                 + "\n-------------------------------"
+                + "\nInstructions:"
                 + "\nYou will be playing against a bot, each will recieve 7 random cards from the deck. "
                 + "\nYour goal is to ask for a card from the opponent to add to your deck. "
                 + "\nIf you have 4 of the same, that is one point. "
                 + "\nThe winner will be declared by who has more points at the end. May the best player win!");
         
         //Creating the user deck of random cards
-        for (int i = 0; i < userDeck.length; i++)
+        for (int i = 0; i < 7; i++)
         {
             Card c = new Card();
-            c.setSuit(Card.SUITS[(int)(Math.random() * 4)]);
-            userDeck[i] = c;
+            c.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+            userDeck.add(c.getCard());
         }
         
         //Creating the game deck of 38 cards
-        for (int i = 0; i < gameDeck.length; i++)
+        for (int i = 0; i < gameDeck.size(); i++)
         {
             Card deck = new Card();
-            deck.setSuit(Card.SUITS[(int)(Math.random() * 4) + 34]);
-            gameDeck[i] = deck; 
+            deck.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+            gameDeck.add(deck.getCard()); 
         }
         
         //Displaying the users deck of 7 cards
         System.out.println("Your Deck: ");
-        for (Card card : userDeck) 
+        for (String str : userDeck) 
         {
-            System.out.println(card.getSuit());
+            System.out.println(str);
         }
         
         //Creating the opponents deck of cards
-        for (int j = 0; j < opponentDeck.length; j++)
+        for (int j = 0; j <= 7; j++)
         {
             Card opponentCard = new Card();
-            opponentCard.setSuit(Card.SUITS[(int)(Math.random() * 4)]);
-            opponentDeck[j] = opponentCard;
+            opponentCard.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+            opponentDeck.add(opponentCard.getCard());
         }
         
         //Getting the user input for the first card to add to their deck
@@ -175,28 +165,58 @@ public abstract class Game {
         Card.userSuit = input.nextLine();
         
         //Creating the opponents deck of cards
-        for (int j = 0; j < opponentDeck.length; j++)
+        for (int j = 0; j < 7; j++)
         {
             Card opponentCard = new Card();
-            opponentCard.setSuit(Card.SUITS[(int)(Math.random() * 4)]);
-            opponentDeck[j] = opponentCard;
+            opponentCard.setCard(Card.CARDS[(int)(Math.random() * 13)]);
+            opponentDeck.set(j, opponentCard.getCard());
         
-        /*If the user guess matches, execute this line and add that guessed card to the user deck, and subtract it from 
-        the opponents deck.*/
-        if(Card.userSuit.equals(opponentCard.getSuit().toLowerCase())) {
-            System.out.println("------------------------------- \nOpponent: Yes, I have " + Card.userSuit); 
-            userTurn();
-        }
-        else {
-            userGoFish();
-            opponentTurn();
-        }
+            /*If the user guess matches, execute this line and add that guessed card to the user deck, and subtract it from 
+            the opponents deck.*/
+            if(Card.userSuit.equals(opponentCard.getCard().toLowerCase())) 
+            {
+                System.out.println("------------------------------- \nOpponent: Yes, I have " + Card.userSuit); 
+                userTurn();
+            }
+            else 
+            {
+                userGoFish();
+                opponentTurn();
+            }
         }
     }
 
     /**
      * When the game is over, use this method to declare and display a winning player.
      */
-    public abstract void declareWinner();
+    public void declareWinner() {
+        
+        boolean loop = true;
+        while(loop == true){
+        
+        if(userScore > oppScore)
+        {
+            System.out.println(userScore + "\n" + oppScore + "\nGG! You Won!");
+        }
+        else if(oppScore > userScore)
+        {
+            System.out.println(userScore + "\n" + oppScore + "\nSorry, you lost.");
+        }
+        else
+        {
+            System.out.println(userScore + "\n" + oppScore + "\nLooks like it was a tie!");
+        }
+        
+        Scanner input = new Scanner(System.in);
+        System.out.println("Would you like to try again? (y/n) ");
+                String answer = input.nextLine();
+                
+                loop = input.nextLine().trim().equalsIgnoreCase("y");
+                
+                if(loop == false)
+                    System.out.println("Thank you for playing!");
+        }
+            
+    }
 
 }//end class
